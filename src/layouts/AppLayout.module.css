@@ -1,0 +1,16 @@
+.page {
+  display: grid;
+  grid-template-columns: 18.75rem 1fr;
+}
+
+.main {
+  background-color: var(--color-bg-white);
+  margin: 0.5rem 0.5rem 0.5rem;
+  height: calc(100vh - 1rem);
+
+  border: 0.5px solid lch(86.22 0 282.863);
+  border-bottom-left-radius: var(--border-radius-sm);
+  border-top-left-radius: var(--border-radius-sm);
+  border-bottom-right-radius: var(--border-radius-md);
+  border-top-right-radius: var(--border-radius-md);
+}

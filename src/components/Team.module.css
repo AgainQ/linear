@@ -1,0 +1,39 @@
+.teamName {
+  cursor: pointer;
+  margin-bottom: 0.25rem;
+}
+
+.navLinksList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.navLink:link,
+.navLink:visited {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  padding: 0.25rem;
+  padding-left: 0.75rem;
+  border-radius: var(--border-radius-sm);
+  color: #555;
+  font-weight: 500;
+  transition: all 0.3s;
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.navLink:hover,
+.navLink:visited {
+  color: #333;
+  background-color: lch(94.1% 0.01 296.81);
+}
+
+.navLink:global(.active) {
+  background-color: lch(90.1% 0.01 296.81);
+}

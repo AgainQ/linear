@@ -1,3 +1,3 @@
 export default function Issues() {
-  return <div>Issues</div>;
+  return <div>All Issues</div>;
 }
