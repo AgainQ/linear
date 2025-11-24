@@ -1,8 +1,11 @@
-import type { Tables } from './database.types';
+import type { Tables, Enums } from './database.types';
 
 type TeamRow = Tables<'teams'>;
 type ProjectRow = Tables<'projects'>;
-type ColumnRow = Tables<'columns'>;
 type IssueRow = Tables<'issues'>;
 
-export type { TeamRow, ProjectRow, ColumnRow, IssueRow };
+type Priority = Enums<'Priority'>;
+type IssueStatus = Enums<'Issue Status'>;
+type ProjectStatus = Enums<'Project Status'>;
+
+export type { TeamRow, ProjectRow, IssueRow, Priority, IssueStatus, ProjectStatus };

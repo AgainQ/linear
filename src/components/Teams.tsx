@@ -1,11 +1,40 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import styles from './Team.module.css';
-import { Box, Grid2x2 } from 'lucide-react';
+import { useTeams } from '@/features/teams/hooks';
 
-export default function Team({ name }: { name: string }) {
+import Spinner from './Spinner';
+import ErrorMessage from './ErrorMessage';
+import { Box, Grid2x2 } from 'lucide-react';
+import styles from './Teams.module.css';
+
+import type { TeamRow } from '@/types/types';
+
+export default function Teams() {
+  const { teams, isPending, error } = useTeams();
+
+  if (isPending) return <Spinner />;
+  if (error) return <ErrorMessage />;
+  // if teams.length ==== 0 ...
+
+  return (
+    <div>
+      {teams.map(team => (
+        <Team team={team} key={team.identifier} />
+      ))}
+    </div>
+  );
+}
+
+type TeamProps = {
+  team: TeamRow;
+};
+
+function Team({ team }: TeamProps) {
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(open => !open);
+
+  const { name, identifier } = team;
+
   return (
     <div>
       <p onClick={toggleOpen} className={styles.teamName}>

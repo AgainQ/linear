@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Toaster } from 'sonner';
 import Issues from './pages/Issues';
 import Projects from './pages/Projects';
@@ -15,6 +16,10 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <AppRouter />
       <Toaster visibleToasts={5} position='top-center' richColors expand />
+
+      <div className='devtools-wrapper'>
+        <ReactQueryDevtools client={queryClient} />
+      </div>
     </QueryClientProvider>
   );
 }
@@ -23,7 +28,6 @@ function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* should be hidden behind protected route actually */}
         <Route index element={<Navigate to='team' replace />} />
 
         <Route element={<AppLayout />}>
@@ -37,8 +41,8 @@ function AppRouter() {
 
           <Route path='team'>
             <Route index element={<Navigate to='W/issues/all' replace />} />
-            <Route path='W/issues/all' element={<Issues />} />
-            <Route path='W/projects/all' element={<Projects />} />
+            <Route path=':teamIdentifier/issues/all' element={<Issues />} />
+            <Route path=':teamIdentifier/projects/all' element={<Projects />} />
           </Route>
 
           <Route path='issue/:issueId' element={<Issue />} />

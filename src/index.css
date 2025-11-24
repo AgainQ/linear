@@ -135,3 +135,7 @@ body {
   height: 100vh;
   background-color: var(--color-bg-grey);
 }
+
+.devtools-wrapper {
+  font-size: 125%;
+}

@@ -1,12 +1,12 @@
 import styles from './Sidebar.module.css';
-import Team from './Team';
+import Teams from './Teams';
 
 export default function Sidebar() {
   return (
     <div className={styles.sidebar}>
       <div>
         <p>Your teams</p>
-        <Team name='cat' />
+        <Teams />
       </div>
     </div>
   );

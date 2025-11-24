@@ -34,90 +34,131 @@ export type Database = {
   }
   public: {
     Tables: {
-      columns: {
-        Row: {
-          created_at: string
-          id: number
-          name: string
-        }
-        Insert: {
-          created_at?: string
-          id?: number
-          name: string
-        }
-        Update: {
-          created_at?: string
-          id?: number
-          name?: string
-        }
-        Relationships: []
-      }
       issues: {
         Row: {
-          created_at: string
+          assignedTo: number | null
+          createdAt: string
+          createdBy: number
           description: string | null
           id: number
-          priority: string
-          responsibleUser: number | null
+          priority: Database["public"]["Enums"]["Priority"]
+          projectId: number
+          status: Database["public"]["Enums"]["Issue Status"]
+          teamId: number
           title: string
+          updatedAt: string | null
         }
         Insert: {
-          created_at?: string
+          assignedTo?: number | null
+          createdAt?: string
+          createdBy: number
           description?: string | null
           id?: number
-          priority: string
-          responsibleUser?: number | null
+          priority: Database["public"]["Enums"]["Priority"]
+          projectId: number
+          status: Database["public"]["Enums"]["Issue Status"]
+          teamId: number
           title: string
+          updatedAt?: string | null
         }
         Update: {
-          created_at?: string
+          assignedTo?: number | null
+          createdAt?: string
+          createdBy?: number
           description?: string | null
           id?: number
-          priority?: string
-          responsibleUser?: number | null
+          priority?: Database["public"]["Enums"]["Priority"]
+          projectId?: number
+          status?: Database["public"]["Enums"]["Issue Status"]
+          teamId?: number
           title?: string
+          updatedAt?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "issues_projectId_fkey"
+            columns: ["projectId"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "issues_teamId_fkey"
+            columns: ["teamId"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       projects: {
         Row: {
+          color: string
           createdAt: string
+          createdBy: number
+          description: string | null
           id: number
-          key: string
           name: string
+          priority: Database["public"]["Enums"]["Priority"]
+          status: Database["public"]["Enums"]["Project Status"]
+          teamId: number
+          updatedAt: string
         }
         Insert: {
+          color: string
           createdAt?: string
+          createdBy: number
+          description?: string | null
           id?: number
-          key: string
           name: string
+          priority: Database["public"]["Enums"]["Priority"]
+          status: Database["public"]["Enums"]["Project Status"]
+          teamId: number
+          updatedAt?: string
         }
         Update: {
+          color?: string
           createdAt?: string
+          createdBy?: number
+          description?: string | null
           id?: number
-          key?: string
           name?: string
+          priority?: Database["public"]["Enums"]["Priority"]
+          status?: Database["public"]["Enums"]["Project Status"]
+          teamId?: number
+          updatedAt?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "projects_teamId_fkey"
+            columns: ["teamId"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       teams: {
         Row: {
-          created_at: string
+          createdAt: string
           id: number
-          identifier: string | null
-          name: string | null
+          identifier: string
+          name: string
+          updatedAt: string | null
         }
         Insert: {
-          created_at?: string
+          createdAt?: string
           id?: number
-          identifier?: string | null
-          name?: string | null
+          identifier: string
+          name: string
+          updatedAt?: string | null
         }
         Update: {
-          created_at?: string
+          createdAt?: string
           id?: number
-          identifier?: string | null
-          name?: string | null
+          identifier?: string
+          name?: string
+          updatedAt?: string | null
         }
         Relationships: []
       }
@@ -129,7 +170,21 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      "Issue Status":
+        | "later"
+        | "tasks"
+        | "tomorrow"
+        | "today"
+        | "now"
+        | "done"
+        | "canceled"
+      Priority: "none" | "low" | "medium" | "high" | "urgent"
+      "Project Status":
+        | "backlog"
+        | "planned"
+        | "active"
+        | "completed"
+        | "canceled"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -259,7 +314,25 @@ export const Constants = {
     Enums: {},
   },
   public: {
-    Enums: {},
+    Enums: {
+      "Issue Status": [
+        "later",
+        "tasks",
+        "tomorrow",
+        "today",
+        "now",
+        "done",
+        "canceled",
+      ],
+      Priority: ["none", "low", "medium", "high", "urgent"],
+      "Project Status": [
+        "backlog",
+        "planned",
+        "active",
+        "completed",
+        "canceled",
+      ],
+    },
   },
 } as const
 
