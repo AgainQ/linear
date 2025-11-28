@@ -4,13 +4,16 @@ import { useTeams } from '@/features/teams/hooks';
 
 import Spinner from './Spinner';
 import ErrorMessage from './ErrorMessage';
-import { Box, Grid2x2 } from 'lucide-react';
+import { ArrowBigRight, Box, Layers2, SquareChartGantt, SquareUser } from 'lucide-react';
+import clsx from 'clsx';
 import styles from './Teams.module.css';
 
 import type { TeamRow } from '@/types/types';
 
 export default function Teams() {
   const { teams, isPending, error } = useTeams();
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleOpen = () => setIsOpen(open => !open);
 
   if (isPending) return <Spinner />;
   if (error) return <ErrorMessage />;
@@ -18,9 +21,17 @@ export default function Teams() {
 
   return (
     <div>
-      {teams.map(team => (
-        <Team team={team} key={team.identifier} />
-      ))}
+      <p className={styles.text} onClick={toggleOpen}>
+        <span>Your teams</span>
+        <ArrowBigRight className={clsx(styles.arrowIcon, isOpen && styles.open)} />
+      </p>
+      {isOpen && (
+        <div>
+          {teams.map(team => (
+            <Team team={team} key={team.identifier} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
@@ -38,19 +49,25 @@ function Team({ team }: TeamProps) {
   return (
     <div>
       <p onClick={toggleOpen} className={styles.teamName}>
-        <span>{name}</span>
+        <SquareUser className={styles.teamIcon} strokeWidth={2} /> <span>{name}</span>
       </p>
       {isOpen && (
         <ul className={styles.navLinksList}>
           <li>
             <NavLink to='team/W/issues/all' className={styles.navLink}>
-              <Grid2x2 />
+              <SquareChartGantt />
               Issues
             </NavLink>
           </li>
           <li>
             <NavLink to='team/W/projects/all' className={styles.navLink}>
               <Box /> Projects
+            </NavLink>
+          </li>
+          <li>
+            {/* tbd */}
+            <NavLink to='team/W/issues/all/' className={styles.navLink}>
+              <Layers2 /> Views
             </NavLink>
           </li>
         </ul>

@@ -1,7 +1,42 @@
+/*  */
+.text {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  padding: 0.25rem 0;
+  border-radius: var(--border-radius-sm);
+
+  &:hover {
+    background-color: var(--color-bg-grey-hover);
+  }
+}
+
+.arrowIcon {
+  width: 0.875rem;
+  height: 0.875rem;
+  transition: all 0.2s;
+
+  &.open {
+    color: green;
+    transform: rotateZ(90deg);
+  }
+}
+
 /* team */
 .teamName {
   cursor: pointer;
   margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.teamIcon {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: #b869ff;
 }
 
 .navLinksList {
@@ -32,9 +67,9 @@
 .navLink:hover,
 .navLink:visited {
   color: #333;
-  background-color: lch(94.1% 0.01 296.81);
+  background-color: var(--color-bg-grey-hover);
 }
 
 .navLink:global(.active) {
-  background-color: lch(90.1% 0.01 296.81);
+  background-color: var(--color-bg-grey-active);
 }

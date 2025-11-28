@@ -124,6 +124,9 @@
   --color-bg-grey: #f5f5f5;
   --color-bg-white: #fcfcfc;
 
+  --color-bg-grey-hover: lch(94.1% 0.01 296.81);
+  --color-bg-grey-active: lch(90.1% 0.01 296.81);
+
   --color-border-grey: lch(86.22 0 282.863);
 
   /* BORDERS */

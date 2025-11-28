@@ -1,0 +1,62 @@
+/* views bar */
+.viewsBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0.5rem 2rem;
+  border-bottom: 1px solid #eee;
+
+  .rightBtnGroup {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+
+.projectName {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* table operations */
+.tableOperations {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0.5rem 2rem;
+  border-bottom: 1px solid #eee;
+}
+
+/* btns */
+
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--color-bg-grey-hover);
+  }
+}
+
+.addProjectBtn {
+  padding: 4px 8px;
+}
+
+.copyUrlBtn {
+  padding: 8px 8px;
+}
+
+.filterBtn {
+  padding: 4px 8px;
+}
+
+.displayBtn {
+  padding: 4px 8px;
+}
